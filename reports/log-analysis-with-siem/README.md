@@ -37,7 +37,7 @@
        ```
   3. **持久化機制識別：** 在檢視連續事件中，觀察到疑似使用 `schtasks.exe` 建立排程工作的紀錄。在 `CommandLine` 欄位中，發現其建立了排程名稱為 **`Office365 Install`** 的任務。在 Lab 情境中，這可能代表攻擊者嘗試透過 Windows 排程工作維持執行能力（Persistence）。
 * **初步風險判斷：** 若在真實環境中觀察到位於 `C:\Windows\Temp\` 的未知執行檔向外部非標準 Port 建立連線，並伴隨 `schtasks.exe` 建立排程工作，應優先檢查該檔案來源、Hash、執行帳號、排程內容與外連目的 IP，確認是否為惡意程式或未授權行為。
-![螢幕擷取畫面 2026-06-15 150139](https://hackmd.io/_uploads/HyNh1V6bGx.png)
+![Windows 可疑外連與排程工作](images/windows-suspicious-connection.png)
 
 
 ### 3.2 Linux SSH 登入異常與 CRON 可疑任務分析
@@ -56,7 +56,7 @@
      * **查詢結果：** 從紀錄中觀察到該帳號在成功登入前曾出現多次失敗嘗試，因此在 Lab 情境中可初步判斷為疑似 **SSH 暴力破解成功**。
   4. **定時任務後門偵測：** 最後，我檢查與 cron 相關的系統日誌：`index=task5 "cron"`。在結果中觀察到一段透過 Python 建立外部連線的單行指令，其中包含：`s.connect(("10.10.33.31", 7654))`。這類指令在 Lab 情境中具有**反向連線（Reverse Shell）**的特徵，可能被用於維持存取或建立遠端控制通道。
 * **初步風險判斷：** 若在真實環境中觀察到 SSH 多次登入失敗後成功登入、一般使用者切換為 root，以及 CRON 中出現不明 Python 外連指令，應進一步檢查帳號是否遭盜用、CRON 任務內容、來源 IP、執行時間與外連目的地，並評估是否需要隔離主機與重設憑證。
-![螢幕擷取畫面 2026-06-15 154105](https://hackmd.io/_uploads/SJ9ZlNTbzl.png)
+![Linux CRON 可疑外連](images/linux-cron-reverse-shell.png)
 
 
 
@@ -71,7 +71,7 @@
        ```
      * **查詢結果：** 成功鎖定來源 IP 為 `10.10.243.134`，且其 User-Agent 欄位明確顯示為 **`WPScan v3.8.28`**。WPScan 是常見的 WordPress 安全掃描工具，在 Lab 情境中，這代表該來源可能正在對 WordPress 登入頁面進行自動化掃描或登入嘗試。
 * **初步風險判斷：** 若在真實環境中觀察到單一 IP 對 `/wp-login.php` 發出大量 POST 請求，且 User-Agent 顯示為自動化掃描工具，應檢查是否有成功登入紀錄、異常帳號活動、管理後台變更紀錄，並評估是否需要封鎖來源 IP、啟用登入限制、MFA 或 WAF 規則。
-![螢幕擷取畫面 2026-06-15 153808](https://hackmd.io/_uploads/HkqC1NTZMe.png)
+![Web WPScan 請求分析](images/web-wpscan-analysis.png)
 
 ---
 
