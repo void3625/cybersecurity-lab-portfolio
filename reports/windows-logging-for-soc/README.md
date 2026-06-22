@@ -17,7 +17,7 @@ Windows 事件日誌分析與 SOC 調查練習
 
 > 📸 **實證截圖 1 - RDP 登入分析：**
 > 
-![螢幕擷取畫面 2026-06-14 145753]
+![RDP 登入分析](images/rdp-login-analysis.png)
 
 ---
 
@@ -29,7 +29,7 @@ Windows 事件日誌分析與 SOC 調查練習
 
 > 📸 **實證截圖 2 - 帳號提權分析：**
 > 
-![螢幕擷取畫面 2026-06-14 151433]
+![帳號與權限異動分析](images/account-privilege-change.png)
 
 ---
 
@@ -41,7 +41,7 @@ Windows 事件日誌分析與 SOC 調查練習
 * **初步風險判斷**： 若可疑執行檔同時出現外部連線、Startup 目錄落地與不明來源下載紀錄，可能代表該主機存在惡意程式執行與持久化風險。在真實環境中，應進一步蒐集檔案 Hash、執行路徑、來源 URL、C2 IP，並確認是否有其他端點出現相同 IOC。
 > 📸 **實證截圖 3 - Zone.Identifier 來源網址提取：**
 
-![螢幕擷取畫面 2026-06-14 154910]
+![Zone.Identifier 來源網址](images/zone-identifier-source-url.png)
 
 ---
 
@@ -52,7 +52,7 @@ Windows 事件日誌分析與 SOC 調查練習
 
 > 📸 **實證截圖 4 - PowerShell 手工鑑識成果：**
 
-![螢幕擷取畫面 2026-06-14 161804]
+![PowerShell History 調查](images/powershell-history.png)
 
 ---
 ## 3.MITRE ATT&CK 對應練習
