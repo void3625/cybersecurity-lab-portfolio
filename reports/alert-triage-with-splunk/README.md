@@ -62,7 +62,7 @@ index="linux-alert" sourcetype="linux_secure" 10.10.242.248
 
 若在真實環境中出現類似情況，應優先確認該登入是否為合法使用者行為，並檢查來源 IP、帳號使用紀錄、登入時間、主機後續指令與是否有新增帳號或排程任務。
 
-![image](https://hackmd.io/_uploads/BJyHStRbMg.png)
+![image](images/analysis-login.png)
 
 ---
 
@@ -107,7 +107,7 @@ index="win-alert" EventCode=4624 "oliver.thompson"
 
 雖然操作帳號是系統工程師帳號，但排程下載不明執行檔並透過 PowerShell 執行，仍然屬於高風險行為。若在真實環境中觀察到類似狀況，應確認該帳號是否遭盜用，並檢查排程內容、下載來源、檔案 Hash、父子程序關係與主機後續外連行為。
 
-![image](https://hackmd.io/_uploads/rJljSKRWzg.png)
+![image](images/malicious-command.png)
 
 
 ---
@@ -154,7 +154,7 @@ index=web-alert 171.251.232.40 b374k.php
 
 若在真實環境中觀察到 Web Shell 檔案被存取，應優先確認該檔案是否真的存在於伺服器目錄中，並檢查其建立時間、擁有者、Web Server 權限、相關上傳紀錄與是否有後續命令執行紀錄。
 
-![螢幕擷取畫面 2026-06-16 154652](https://hackmd.io/_uploads/HJE3BF0-Gx.png)
+![images](images/post.png)
 
 ---
 
